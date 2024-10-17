@@ -1,14 +1,13 @@
 import { useState } from "react";
 import EditableField from "./EditableField";
 import VariantRow from "./VariantRow";
+import { PrimaryVariant, Product } from "@/types";
 
-//@ts-expect-error ignore
-export default function ProductRow({ product, onUpdate }) {
+export default function ProductRow({ product, onUpdate }: { product: Product; onUpdate: (updatedProduct: Product) => void }) {
   const [expanded, setExpanded] = useState(false);
 
   // Calculate variant counts
   const variantCount = product.primary_variants.length;
-  //@ts-expect-error ignore
   const totalSecondaryVariants = product.primary_variants.reduce((acc, variant) => acc + variant.secondary_variants.length, 0);
 
   return (
@@ -41,8 +40,7 @@ export default function ProductRow({ product, onUpdate }) {
             <EditableField value={product.discountPercentage} onUpdate={(value) => onUpdate({ ...product, discountPercentage: value })} suffix="%" />
           </div>
           <div className="col-span-2 flex space-x-1">
-            {/* @ts-expect-error ignore */}
-            {product.primary_variants.map((variant) => (
+            {product.primary_variants.map((variant: PrimaryVariant) => (
               <div key={variant.name} className="w-4 h-4 rounded-full" style={{ backgroundColor: variant.name.toLowerCase() }} />
             ))}
             <span className="text-gray-400 ml-1">+{variantCount}</span>
@@ -54,17 +52,15 @@ export default function ProductRow({ product, onUpdate }) {
       </div>
       {expanded && (
         <div className="pl-0 ">
-          {/* @ts-expect-error ignore */}
-          {product.primary_variants.map((variant) => (
+          {product.primary_variants.map((variant: PrimaryVariant) => (
             <VariantRow
               key={variant.name}
               variant={variant}
-              //@ts-expect-error ignore
               onUpdate={(updated) => {
-                //@ts-expect-error ignore
-                const updatedVariants = product.primary_variants.map((v) => (v.name === variant.name ? updated : v));
+                const updatedVariants = product.primary_variants.map((v: PrimaryVariant) => (v.name === variant.name ? updated : v));
                 onUpdate({
                   ...product,
+                  //@ts-expect-error inote
                   primary_variants: updatedVariants,
                 });
               }}

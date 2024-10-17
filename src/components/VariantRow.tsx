@@ -1,7 +1,8 @@
 import { useState } from "react";
 import EditableField from "./EditableField";
-//@ts-expect-error ignore
-export default function VariantRow({ variant, onUpdate }) {
+import { PrimaryVariant, Product, SecondaryVariant } from "@/types";
+
+export default function VariantRow({ variant, onUpdate }: { variant: PrimaryVariant; onUpdate: (updatedProduct: Product) => void }) {
   const [expanded, setExpanded] = useState(false);
   const secondaryVariantCount = variant.secondary_variants.length;
 
@@ -40,17 +41,15 @@ export default function VariantRow({ variant, onUpdate }) {
       </div>
       {expanded && (
         <div className="pl-0">
-          {/* @ts-expect-error ignore */}
           {variant.secondary_variants.map((secondaryVariant, index: number) => (
             <SecondaryVariantRow
               key={secondaryVariant.name}
               variant={secondaryVariant}
-              //@ts-expect-error ignore
               onUpdate={(updated) => {
-            //@ts-expect-error ignore 
                 const updatedVariants = variant.secondary_variants.map((v, i: number) => (i === index ? updated : v));
                 onUpdate({
                   ...variant,
+                  //@ts-expect-error ignore
                   secondary_variants: updatedVariants,
                 });
               }}
@@ -63,9 +62,8 @@ export default function VariantRow({ variant, onUpdate }) {
 }
 
 
-//@ts-expect-error ignore
-function SecondaryVariantRow({ variant, onUpdate }) {
-    return (
+function SecondaryVariantRow({ variant, onUpdate }: { variant: SecondaryVariant; onUpdate: (updatedProduct: Product) => void }) {
+  return (
     <div className="group hover:bg-gray-800/10">
       <div className="px-4 py-3 sm:px-6">
         <div className="grid grid-cols-12 gap-4 items-center">

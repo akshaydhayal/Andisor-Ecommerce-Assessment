@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import ProductList from "@/components/ProductList";
 import Navbar from "@/components/Navbar";
 import { data } from "@/data";
+import { Product } from "@/types";
 
 export default function Home() {
-  const [products, setProducts] = useState(data);
+  const [products, setProducts] = useState<Product[]>(data);
 
   useEffect(() => {
     // Load from session storage if available
@@ -13,17 +14,12 @@ export default function Home() {
     if (savedProducts) {
       setProducts(JSON.parse(savedProducts));
     } else {
-      // Initial data load
-      setProducts(
-        /* your provided data */
-        products
-      );
+      setProducts(products);
     }
   }, []);
 
-  //@ts-expect-error ignore
-  const updateProduct = (updatedProduct) => {
-    const newProducts = products.map((p) => (p.id === updatedProduct.id ? updatedProduct : p));
+  const updateProduct = (updatedProduct:Product) => {
+    const newProducts = products.map((p:Product) => (p.id === updatedProduct.id ? updatedProduct : p));
     setProducts(newProducts);
     sessionStorage.setItem("products", JSON.stringify(newProducts));
   };

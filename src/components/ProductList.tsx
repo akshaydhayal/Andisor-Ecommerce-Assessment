@@ -1,7 +1,7 @@
+import { Product } from "@/types";
 import ProductRow from "./ProductRow";
 
-//@ts-expect-error ignore
-export default function ProductList({ products, onUpdate }) {
+export default function ProductList({ products, onUpdate }: { products: Product[]; onUpdate: (updatedProduct: Product) => void }) {
   return (
     <div className="bg-gray-800/30 rounded-lg shadow-xl border border-gray-700">
       <div className="px-4 py-5 sm:px-6">
@@ -17,8 +17,7 @@ export default function ProductList({ products, onUpdate }) {
         </div>
       </div>
       <div className="divide-y divide-gray-700">
-        {/* @ts-expect-error ignore */}
-        {products.map((product) => (
+        {products.map((product: Product) => (
           <ProductRow key={product.id} product={product} onUpdate={onUpdate} />
         ))}
       </div>
