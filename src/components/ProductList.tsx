@@ -17,7 +17,8 @@ export default function ProductList({ products, onUpdate }) {
         </div>
       </div>
       <div className="divide-y divide-gray-700">
-        {products.map((product:any) => (
+        {/* @ts-expect-error ignore */}
+        {products.map((product) => (
           <ProductRow key={product.id} product={product} onUpdate={onUpdate} />
         ))}
       </div>

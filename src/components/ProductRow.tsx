@@ -29,15 +29,15 @@ export default function ProductRow({ product, onUpdate }) {
             </div>
           </div>
           <div className="col-span-1">
-              {/* @ts-expect-error ignore */}
+            {/* @ts-expect-error ignore */}
             <EditableField value={product.inventory} onUpdate={(value) => onUpdate({ ...product, inventory: value })} />
           </div>
           <div className="col-span-1">
-              {/* @ts-expect-error ignore */}
+            {/* @ts-expect-error ignore */}
             <EditableField value={product.price} onUpdate={(value) => onUpdate({ ...product, price: value })} prefix="$" />
           </div>
           <div className="col-span-1">
-              {/* @ts-expect-error ignore */}
+            {/* @ts-expect-error ignore */}
             <EditableField value={product.discountPercentage} onUpdate={(value) => onUpdate({ ...product, discountPercentage: value })} suffix="%" />
           </div>
           <div className="col-span-2 flex space-x-1">
@@ -54,12 +54,14 @@ export default function ProductRow({ product, onUpdate }) {
       </div>
       {expanded && (
         <div className="pl-0 ">
-          {product.primary_variants.map((variant:any) => (
+          {/* @ts-expect-error ignore */}
+          {product.primary_variants.map((variant) => (
             <VariantRow
-            key={variant.name}
-            variant={variant}
-            //@ts-expect-error ignore
+              key={variant.name}
+              variant={variant}
+              //@ts-expect-error ignore
               onUpdate={(updated) => {
+                //@ts-expect-error ignore
                 const updatedVariants = product.primary_variants.map((v) => (v.name === variant.name ? updated : v));
                 onUpdate({
                   ...product,

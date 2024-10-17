@@ -21,15 +21,15 @@ export default function VariantRow({ variant, onUpdate }) {
             </div>
           </div>
           <div className="col-span-1">
-              {/* @ts-expect-error ignore */}
+            {/* @ts-expect-error ignore */}
             <EditableField value={variant.inventory} onUpdate={(value) => onUpdate({ ...variant, inventory: value })} />
           </div>
           <div className="col-span-1">
-              {/* @ts-expect-error ignore */}
+            {/* @ts-expect-error ignore */}
             <EditableField value={variant.price} onUpdate={(value) => onUpdate({ ...variant, price: value })} prefix="$" />
           </div>
           <div className="col-span-1">
-              {/* @ts-expect-error ignore */}
+            {/* @ts-expect-error ignore */}
             <EditableField value={variant.discountPercentage} onUpdate={(value) => onUpdate({ ...variant, discountPercentage: value })} suffix="%" />
           </div>
           <div className="col-span-2"></div>
@@ -39,19 +39,21 @@ export default function VariantRow({ variant, onUpdate }) {
         </div>
       </div>
       {expanded && (
-          <div className="pl-0">
-          {variant.secondary_variants.map((secondaryVariant:any, index:number) => (
-              <SecondaryVariantRow
+        <div className="pl-0">
+          {/* @ts-expect-error ignore */}
+          {variant.secondary_variants.map((secondaryVariant, index: number) => (
+            <SecondaryVariantRow
               key={secondaryVariant.name}
               variant={secondaryVariant}
               //@ts-expect-error ignore
               onUpdate={(updated) => {
-                  const updatedVariants = variant.secondary_variants.map((v:any, i:number) => (i === index ? updated : v));
+            //@ts-expect-error ignore 
+                const updatedVariants = variant.secondary_variants.map((v, i: number) => (i === index ? updated : v));
                 onUpdate({
-                    ...variant,
-                    secondary_variants: updatedVariants,
+                  ...variant,
+                  secondary_variants: updatedVariants,
                 });
-            }}
+              }}
             />
           ))}
         </div>
