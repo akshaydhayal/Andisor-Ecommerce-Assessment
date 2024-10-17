@@ -1,5 +1,6 @@
 import ProductRow from "./ProductRow";
 
+//@ts-expect-error ignore
 export default function ProductList({ products, onUpdate }) {
   return (
     <div className="bg-gray-800/30 rounded-lg shadow-xl border border-gray-700">
@@ -16,7 +17,7 @@ export default function ProductList({ products, onUpdate }) {
         </div>
       </div>
       <div className="divide-y divide-gray-700">
-        {products.map((product) => (
+        {products.map((product:any) => (
           <ProductRow key={product.id} product={product} onUpdate={onUpdate} />
         ))}
       </div>

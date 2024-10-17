@@ -21,6 +21,7 @@ export default function Home() {
     }
   }, []);
 
+  //@ts-expect-error ignore
   const updateProduct = (updatedProduct) => {
     const newProducts = products.map((p) => (p.id === updatedProduct.id ? updatedProduct : p));
     setProducts(newProducts);

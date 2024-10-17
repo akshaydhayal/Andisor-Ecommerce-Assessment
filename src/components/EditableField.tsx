@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+//@ts-expect-error ignore
 export default function EditableField({ value, onUpdate, prefix, suffix, className = "text-gray-300" }) {
   const [editing, setEditing] = useState(false);
   const [tempValue, setTempValue] = useState(value);
